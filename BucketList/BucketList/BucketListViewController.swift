@@ -8,9 +8,26 @@
 
 import UIKit
 
+//==============================================================//
+//========================= Main page view =====================//
+//==============================================================//
 class BucketListViewController: UITableViewController, AddItemTableViewControllerDelegate {
 
+    
+    // variable created = AddItemButton
+    @IBOutlet weak var AddItemButton: UIBarButtonItem!
+    
+    // function for the actual button being pressed
+    @IBAction func AddItemPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "itemSegue", sender: AddItemButton)
+        // performSegue is a function that takes in 2 arguments( "itemSegue" is the connectiong between table views)
+        
+    }
+    
+    
+    
     var items = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,16 +60,18 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print ("selected")
-        // used to have "performSegue.... Identifier "EditItemSegue"
+        // used to have "performSegue.... Identifier "itemSegue"
             // moved it below because "accessoryButton" has been added!
             // because of the "accessoryButton" this func is no longer needed! ==**==========
 
     }
     
     
+    
+    // edit item for row selected
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditItemSegue", sender: indexPath)
-        // this func listens for the user to press the acessoryButton. THEN performs the segue for the Identifier
+        performSegue(withIdentifier: "itemSegue", sender: indexPath)
+        // this func listens for the user to press the acessoryButton. THEN activates the Identifier "itemSegue"
     }
     
     
@@ -60,32 +79,33 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         items.remove(at: indexPath.row)
+        
         tableView.reloadData()
     }
     
-    
+    // segue prepare which overrides "performSegue" function
+        // for segue: specifically looking for segues in storyboard
+        //sender: what object type sent the request(i.e. bar button item or button, any object,....)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "AddItemSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let AddItemTableViewController = navigationController.topViewController as! AddItemTableViewController
-            AddItemTableViewController.delegate = self
-        }
-        else if segue.identifier == "EditItemSegue" {
+        
+        //storyboard path way
+        if segue.identifier == "itemSegue" {
             let navigationController = segue.destination as! UINavigationController
             let AddItemTableViewController = navigationController.topViewController as! AddItemTableViewController
             AddItemTableViewController.delegate = self
             
-            let indexPath = sender as! NSIndexPath
-            let item = items[indexPath.row]
-            AddItemTableViewController.item = item
-            AddItemTableViewController.indexPath = indexPath
-                                        // the index [] in the array of "items".
-
+            
+            if let indexPath = sender as? NSIndexPath{
+                let item = items[indexPath.row]
+                
+                AddItemTableViewController.item = item
+                AddItemTableViewController.indexPath = indexPath
+                // the index [] in the array of "items".
+            }
         }
-
-        
     }
+    
     
     func CancelButtonPressed(by controller: AddItemTableViewController) {
         print ("I'm the hidden controller, BUT I am responding to the CANCEL button press on the top view controller.")

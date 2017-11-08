@@ -35,17 +35,18 @@
                     <navigationItem key="navigationItem" title="Bucket List" id="HdO-6T-cSc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9JV-hK-pK0">
                             <connections>
-                                <segue destination="8LX-gE-Q5t" kind="presentation" identifier="AddItemSegue" id="jLK-UA-gHm"/>
+                                <action selector="AddItemPressed:" destination="CU5-DM-o4X" id="vpw-Xo-0rn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="8LX-gE-Q5t" kind="presentation" identifier="EditItemSegue" id="rS6-BK-u2A"/>
+                        <outlet property="AddItemButton" destination="9JV-hK-pK0" id="bPX-KT-O9y"/>
+                        <segue destination="8LX-gE-Q5t" kind="presentation" identifier="itemSegue" id="rS6-BK-u2A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4D7-h1-cGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1674" y="356"/>
+            <point key="canvasLocation" x="-1745" y="-493"/>
         </scene>
         <!--Add Item Table View Controller-->
         <scene sceneID="1h2-aD-jQv">
@@ -106,7 +107,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQc-OY-ban" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100" y="-367"/>
+            <point key="canvasLocation" x="-14" y="-507"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kh7-O4-dir">
@@ -124,7 +125,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOb-nP-4En" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2249" y="-332"/>
+            <point key="canvasLocation" x="-2433" y="89"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wkx-f1-4hN">
@@ -142,10 +143,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aT6-rX-hfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-794" y="356"/>
+            <point key="canvasLocation" x="-882" y="-430"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="rS6-BK-u2A"/>
-    </inferredMetricsTieBreakers>
 </document>
